@@ -11,11 +11,11 @@
 
 (defn current_instruction
   [{:keys [program program_pointer]}]
-  (nth program program_pointer))
+  (get program program_pointer))
 
 (defn current_data
   [{:keys [memory memory_pointer]}]
-  (nth memory memory_pointer))
+  (get memory memory_pointer))
 
 (defmulti execute_step
   (fn [state]
