@@ -23,8 +23,8 @@
 
 (defmethod execute_step :default
   [state]
-  (println "Program Complete!" (current_instruction state))
-  nil)
+  ;; Program has completed
+  )
 
 (defmethod execute_step \>
   [state]
