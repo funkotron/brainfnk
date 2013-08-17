@@ -50,19 +50,27 @@
 (defmethod execute_step \[
   [state]
   (if (zero? (current_data state))
-    (loop [state' state]
-      (if (= \] (current_instruction state'))
-        state'
-        (recur (update-in state' [:program_pointer] inc))))
+    (loop [state' state
+           nest 0]
+      (case (current_instruction state')
+        \[ (recur (update-in state' [:program_pointer] inc) (inc nest))
+        \] (if (= 1 nest)
+             state'
+             (recur (update-in state' [:program_pointer] inc) (dec nest)))
+        (recur (update-in state' [:program_pointer] inc) nest)))
     state))
 
 (defmethod execute_step \]
   [state]
   (if-not (zero? (current_data state))
-    (loop [state' state]
-      (if (= \[ (current_instruction state'))
-        state'
-        (recur (update-in state' [:program_pointer] dec))))
+    (loop [state' state
+           nest 0]
+      (case (current_instruction state')
+        \] (recur (update-in state' [:program_pointer] dec) (inc nest))
+        \[ (if (= 1 nest)
+             state'
+             (recur (update-in state' [:program_pointer] dec) (dec nest)))
+        (recur (update-in state' [:program_pointer] dec) nest)))
     state))
 
 (defn run_machine
@@ -72,5 +80,3 @@
 
 (defn -main
   ([program] (run_machine (load_program program))))
-
-
