@@ -70,7 +70,7 @@
   (if-let [state' (execute_step state)]
     (recur (update-in state' [:program_pointer] inc))))
 
-(def prog "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.Q")
+(defn -main
+  ([program] (run_machine (load_program program))))
 
-(run_machine (load_program prog))
 
