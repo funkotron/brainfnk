@@ -2,7 +2,7 @@
 
 (def initial_state {:program ""
                     :program_pointer 0
-                    :memory (vec (repeat 1000 0))
+                    :memory (vec (repeat 1000 0)) ;; 1000 bit memory
                     :memory_pointer 0})
 
 (defn load_program [program]
