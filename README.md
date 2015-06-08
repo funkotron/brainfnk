@@ -1,6 +1,6 @@
 # brainfuck
 
-A Clojure Brainfuck interpreter written at West London Hack Night.
+A Clojure Brainf*** interpreter written at West London Hack Night.
 
 # Usage
 
